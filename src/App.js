@@ -1,14 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Counter from './features/counter/Couter'
-import Posts from './pages/Posts';
+import Home from './pages/Home';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Counter/>}/>
-        <Route exact path="/posts" element={<Posts/>}/>
+        <Route exact path="/" element={<Home/>}/>
       </Routes>
     </BrowserRouter>
   );
