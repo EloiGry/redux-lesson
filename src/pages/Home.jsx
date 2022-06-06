@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from "react-redux";
 import AddProducts from '../features/products/AddProducts';
+import EditProducts from '../features/products/EditProducts';
 
 const Home = () => {
+    const [edit, setEdit] = useState(null)
     const products = useSelector((state) => state.products);
-    console.log(products);
+
     console.count();
     return (
         <>
@@ -16,12 +18,17 @@ const Home = () => {
             </svg>
         </div>
         <div className='flex flex-wrap'>
-        {products.map(product => {
+        {products.map((product,index) => {
             return (
-                <div key={product.id} className='border-2 w-[30%] m-3'>
+                <>
+                {edit === product.id ? (
+                    <EditProducts key={index} id={product.id} setEdit={setEdit}/>
+                ) : (
+                    
+                    <div key={product.id} className='border-2 w-[30%] m-3'>
                     <div className='flex justify-between items-center mb-2'>
                     <h5 className='font-semibold'> Produit : {product.name} </h5>
-                    <button className='bg-blue-400 rounded p-1'> Edit Product</button>
+                    <button className='bg-blue-400 rounded p-1' onClick={() => setEdit(product.id)}> Edit Product</button>
                     </div>
                     <div className='flex justify-between items-center'>
                     <p className='font-semibold'> Prix : {product.price}€ </p>
@@ -29,6 +36,9 @@ const Home = () => {
                     </div>
                     <button className='bg-red-400 rounded p-1 w-[40%] ml-[30%]'> Delete Product </button>
                 </div>
+                )}
+                
+                </>
             )
         })}
         </div>

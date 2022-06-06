@@ -31,10 +31,17 @@ const productsSlice = createSlice({
   reducers: {
       productAdded(state, action) {
         state.push(action.payload)
+      },
+      productEdited(state, action) {
+        const { id, name, price } = action.payload
+        const product = state.find((user) => user.id === id)
+        if (product) {
+            product.name = name;
+            product.price = price;
       }
   },
-});
+}});
 
-export const { productAdded } = productsSlice.actions;
+export const { productAdded, productEdited } = productsSlice.actions;
 
 export default productsSlice.reducer
